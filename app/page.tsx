@@ -7,7 +7,7 @@ import { API_URL } from "@/constans/url";
 
 export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { todos, isLoading, error, mutate } = useTodos();
+  const { todos, mutate } = useTodos();
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +21,6 @@ export default function Home() {
       }),
     });
     if (responds.ok){
-      const newTodo = await responds.json();
       mutate([...todos, ])
       if (inputRef.current?.value){
       inputRef.current!.value ="";

@@ -1,7 +1,6 @@
 "use Client";
 import React, { useState } from "react";
 import { TodoType } from "../type";
-import useSWR, { mutate } from "swr";
 import { useTodos } from "../hooks/useTodo";
 import { API_URL } from "@/constans/url";
 

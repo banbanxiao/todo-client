@@ -1,21 +1,18 @@
 "use client";
-import { todo } from "node:test";
 import Todo from "./components/Todo";
-import useSWR from "swr";
 import { TodoType } from "./type";
 import { useRef } from "react";
 import { useTodos } from "./hooks/useTodo";
 import { API_URL } from "@/constans/url";
 
 export default function Home() {
-  // const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const inputRef = useRef<HTMLInputElement>(null);
   const { todos, isLoading, error, mutate } = useTodos();
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const respons = await fetch(`${API_URL}/createTodo`,{
+    const responds = await fetch(`${API_URL}/createTodo`,{
       method:"POST",
       headers:{"Content-Type": "application/json" },
       body: JSON.stringify ({
@@ -23,8 +20,8 @@ export default function Home() {
         isCompleted: false,
       }),
     });
-    if (respons.ok){
-      const newTodo = await respons.json();
+    if (responds.ok){
+      const newTodo = await responds.json();
       mutate([...todos, ])
       if (inputRef.current?.value){
       inputRef.current!.value ="";

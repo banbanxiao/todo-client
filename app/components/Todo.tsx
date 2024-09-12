@@ -13,7 +13,7 @@ const Todo = ({ todo }: TodoProps) => {
   const [editedTitle, setEditedTitle] = useState<string>(todo.title);
   const { todos, mutate } = useTodos();
 
-  const handleEdit = async ( id : number ) => {
+  const handleEdit = async () => {
     setIsEditing(!isEditing);
     if (isEditing) {
       const response = await fetch(
@@ -36,7 +36,7 @@ const Todo = ({ todo }: TodoProps) => {
     }
   };
 
-  const handleDelete = async (id :number) => {
+  const handleDelete = async (id: number) => {
     const response = await fetch(
       `${API_URL}/deleteTodo/${todo.id}`,
       {
@@ -51,7 +51,7 @@ const Todo = ({ todo }: TodoProps) => {
     }
   };
 
-  const toggleTodoCompletion =async (id: number, isCompleted: boolean) => {
+  const toggleTodoCompletion =async ( isCompleted: boolean) => {
     const response = await fetch(
       `${API_URL}/editTodo/${todo.id}`,
       {
@@ -82,7 +82,7 @@ const Todo = ({ todo }: TodoProps) => {
               // checked="{todo.isCompleted}"
               className="h-4 w-4 text-teal-600 focus:ring-teal-500
                   border-gray-300 rounded"
-                  onChange={()=> toggleTodoCompletion(todo.id, todo.isCompleted)}
+                  onChange={()=> toggleTodoCompletion( todo.isCompleted)}
             />
             <label className="ml-3 block text-gray-900">
               {isEditing ? (
@@ -99,7 +99,7 @@ const Todo = ({ todo }: TodoProps) => {
           </div>
           <div className={`flex items-center space-x-2 `}>
             <button
-              onClick={()=>handleEdit(todo.id)}
+              onClick={()=>handleEdit()}
               className="duration-150 bg-green-600 hover:bg-green-700 text-white font-medium py-1 px-2 rounded"
             >
               {isEditing ? "Save" : "✒"}
